@@ -130,7 +130,17 @@ Number:
 	addi $t7, $t7, -48 	##subtracts 48 to get the value in decimal
 	j multiply				
 		
+#begins implementing branches
+No_input_error:
+	la $a0, empty_input #loads string
+	li $v0, 4 # print string function
+	syscall
+	li $v0,10 #ends program
+	syscall
 
+Input_Long_Error:
+	la $a0, too_long_input #loads string
+	li $v0, 4 # print string function
 	
 
 li $v0,10 #ends program
