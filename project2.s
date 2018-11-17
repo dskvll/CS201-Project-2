@@ -99,6 +99,12 @@ multiply:
 	mflo $t1 #moves value into $t1
 	add $t8, $t8, 1 #increments the number
 	lb $t7,0($t8) #loads the value of the number into t7
+	j Ascii_to_decimal #jumps to ascii convert function
+
+Exit:
+	move $a0, $t5 #moves sum to a0
+	li $v0, 1 #prints contents of a0
+	syscall
 	
 
 li $v0,10 #ends program
