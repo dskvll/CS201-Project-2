@@ -72,6 +72,11 @@ check_length:
 	addi $t8, $t8, 1 #increments
 	addi $t3, $t3, 1 #increments
 	beq $t7, 10, reset_pointer # if user input new line then reset pointer
+	beq $t7, 0, reset_pointer #if the user input is null then reset pointer
+	beq $t7, 32, reset_pointer # if the user input is a space then reset the pointer
+	beq $t3, 5, Input_Long_Error # if the user input exceeds four then it is too long
+	j check_length # jumps to check length function
+	
 	
 
 li $v0,10 #ends program
