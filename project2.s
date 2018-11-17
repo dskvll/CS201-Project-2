@@ -119,8 +119,13 @@ Ascii_to_decimal:
 	blt $t7, 128, Out_of_range_Error #checks if character is between 111 and 127 returns an error if so
 	
 Capital_letter:
-	addi $t7, $t7, -55 
-	j multiply 			
+	addi $t7, $t7, -55 #subtracts 55 to get the value in decimal
+	j multiply 	
+
+Common_letter:
+	addi $t7, $t7, -87 #subtracts 87 to get the value in decimal
+	j multiply				
+		
 
 	
 
