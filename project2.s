@@ -29,11 +29,14 @@ addi $t6, $0, 0 	#initialises register for future use
 addi $t5, $0, 0	 # initialises register for use
 addi $t1, $0, 1 	#initializes register for future use
 
+# processes spaces and disregards them
 space_ignore:
 	lb $t7,0($t0)# loads the byte value of $t0 into $t7	
 	addi $t0, $t0, 1# initialises count to 1
 	addi $t3, $t3, 1# initialises count to 1
 	beq $t7, 32, space_ignore # if the user input is a space then we run the ignore program
+	beq $t7, 10, No_input_error # if the user input is = 10(line feed) then there is no input error
+	beq $t7, $0, No_input_error #if the value of the user input is null then no input error is called
 
 li $v0,10 #ends program
 syscall # call operating system to perform operation
