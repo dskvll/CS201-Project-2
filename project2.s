@@ -82,7 +82,12 @@ reset_pointer:
 	sub $t3, $t3, $t1 #subtracts t1 from t3 and stores it in t1
 	lb $t7, ($t8) # loads the subracted value into t7
 	sub $s1, $t3, $t1 # stores the value of t3-t1 into s1
-	
+
+Length_to_power:	
+	beq $s1, 0, Ascii_to_decimal	#Bringing base to last power of the string
+	mult $t1, $s0 #multiplies the base number by t1
+	mflo $t1 #stores the value into t1
+	sub $s1, $s1, 1 #decrements
 	
 
 li $v0,10 #ends program
