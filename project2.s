@@ -19,6 +19,11 @@ add $t7, $0, 0 #initialises register
 la $t0, user_input # copy address of user input into $t0			
 lb $t7,0($t0) # loads the byte value of $t0 into $t7	
 
+#checks for empty input
+
+beq $t7, 10, No_input_error # branches if $t7 is a new line command	
+beq $t7, 0 No_input_error # branches if there is literally no input in $t7	
+
 li $v0,10 #ends program
 syscall # call operating system to perform operation
 
