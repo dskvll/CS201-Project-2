@@ -118,6 +118,11 @@ Ascii_to_decimal:
 	blt $t7, 111, Common_letter #checks if character is between 97 and 110 runs the capitals function
 	blt $t7, 128, Out_of_range_Error #checks if character is between 111 and 127 returns an error if so
 	
+Capital_letter:
+	addi $t7, $t7, -55 
+	j multiply 			
+
+	
 
 li $v0,10 #ends program
 syscall # call operating system to perform operation
