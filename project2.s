@@ -88,6 +88,12 @@ Length_to_power:
 	mult $t1, $s0 #multiplies the base number by t1
 	mflo $t1 #stores the value into t1
 	sub $s1, $s1, 1 #decrements
+	j Length_to_power
+
+multiply:
+	mult $t7, $t1 #multiples the user input by the required base
+	mflo $t4			# stores the multiplication value
+	add $t5, $t5, $t4 	# adds he values together to get the total
 	
 
 li $v0,10 #ends program
