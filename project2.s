@@ -56,6 +56,11 @@ check_characters_and_spaces:
 	bne $t7, 32, Out_of_range_Error ## if the user input is not equal to a space then the input is not a valid input
 	j check_characters_and_spaces #jumps to function
 
+restart_count:
+	sub $t0, $t0, $t3 	#restarting the pointer in char_array
+	la $t3, 0 			#restarting the counter
+
+
 li $v0,10 #ends program
 syscall # call operating system to perform operation
 
