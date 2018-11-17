@@ -60,6 +60,11 @@ restart_count:
 	sub $t0, $t0, $t3 	#restarting the pointer in char_array
 	la $t3, 0 			#restarting the counter
 
+continue_check:
+	lb $t7,0($t0) # loads the byte value of $t0 into $t7
+	addi $t0, $t0, 1 # initialises count to 1
+	beq $t7, 32, continue_check # if the user input is a space then we run the continue check function
+	
 
 li $v0,10 #ends program
 syscall # call operating system to perform operation
