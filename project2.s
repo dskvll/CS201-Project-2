@@ -66,6 +66,12 @@ continue_check:
 	beq $t7, 32, continue_check # if the user input is a space then we run the continue check function
 	
 addi $t8, $t8, -1 #initialises value to ensure proper calculations
+
+check_length:
+	lb $t7, ($t8) #loads value from t8 into t7
+	addi $t8, $t8, 1 #increments
+	addi $t3, $t3, 1 #increments
+	beq $t7, 10, reset_pointer # if user input new line then reset pointer
 	
 
 li $v0,10 #ends program
