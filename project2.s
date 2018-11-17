@@ -25,8 +25,8 @@ beq $t7, 10, No_input_error # branches if $t7 is a new line command
 beq $t7, 0 No_input_error # branches if there is literally no input in $t7	
 
 addi $s0, $0, 27 #initialises the register with desired base
-addi $t6, $0, 0 	#initialises register for future use
-addi $t5, $0, 0	 # initialises register for use
+addi $t5, $0, 0 	#initialises register for future use
+addi $t4, $0, 0	 # initialises register for use
 addi $t1, $0, 1 	#initializes register for future use
 
 # processes spaces and disregards them
@@ -41,6 +41,14 @@ space_ignore:
 #proceeds to check the individual letters to ensure that there are no intermittent spaces etc
 check_characters:
 	lb $t7,0($t0)# loads the byte value of $t0 into $t7	
+	addi $t0, $t0, 1 # initialises count to 1
+	addi $t3, $t3, 1 # initialises count to 1
+	beq $t7, 10, restart_count # if the value in $t7 is empty it restarts the count
+	beq $t7, 0, restart_count  #if the value in $t7 is empty it restarts the count
+	bne $t7, 32, check_characters # if the user input is not equal to a space then check characters is run
+
+check_characters_and_spaces:
+	lb $t7,0($t0) # loads the byte value of $t0 into $t7
 	addi $t0, $t0, 1 # initialises count to 1
 	addi $t3, $t3, 1 # initialises count to 1
 
