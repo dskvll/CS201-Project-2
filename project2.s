@@ -105,6 +105,13 @@ Exit:
 	move $a0, $t5 #moves sum to a0
 	li $v0, 1 #prints contents of a0
 	syscall
+	li $v0,10 # ends program
+	syscall
+	
+
+Ascii_to_decimal:
+	blt $t7, 48, Out_of_range_Error #checks if character is before 0 in ASCII chart and returns an error if so
+	blt $t7, 58, Number #checks if character is between 48 and 57 if so runs the numbers function
 	
 
 li $v0,10 #ends program
