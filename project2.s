@@ -16,8 +16,8 @@ syscall # calls previous instructions
 
 add $t7, $0, 0 #initialises register
 add $t7, $0, 0 #initialises register
-la $t0, user_input # copy address of user input into $t0			
-lb $t7,0($t0) # loads the byte value of $t0 into $t7	
+la $t8, user_input # copy address of user input into $t8			
+lb $t7,0($t8) # loads the byte value of $t8 into $t7	
 
 #checks for empty input
 
@@ -31,8 +31,8 @@ addi $t1, $0, 1 	#initializes register for future use
 
 # processes spaces and disregards them
 space_ignore:
-	lb $t7,0($t0)# loads the byte value of $t0 into $t7	
-	addi $t0, $t0, 1# initialises count to 1
+	lb $t7,0($t8)# loads the byte value of $t8 into $t7	
+	addi $t8, $t8, 1# initialises count to 1
 	addi $t3, $t3, 1# initialises count to 1
 	beq $t7, 32, space_ignore # if the user input is a space then we run the ignore program
 	beq $t7, 10, No_input_error # if the user input is = 10(line feed) then there is no input error
@@ -40,16 +40,16 @@ space_ignore:
 
 #proceeds to check the individual letters to ensure that there are no intermittent spaces etc
 check_characters:
-	lb $t7,0($t0)# loads the byte value of $t0 into $t7	
-	addi $t0, $t0, 1 # initialises count to 1
+	lb $t7,0($t8)# loads the byte value of $t8 into $t7	
+	addi $t8, $t8, 1 # initialises count to 1
 	addi $t3, $t3, 1 # initialises count to 1
 	beq $t7, 10, restart_count # if the value in $t7 is empty it restarts the count
 	beq $t7, 0, restart_count  #if the value in $t7 is empty it restarts the count
 	bne $t7, 32, check_characters # if the user input is not equal to a space then check characters is run
 
 check_characters_and_spaces:
-	lb $t7,0($t0) # loads the byte value of $t0 into $t7
-	addi $t0, $t0, 1 # initialises count to 1
+	lb $t7,0($t8) # loads the byte value of $t8 into $t7
+	addi $t8, $t8, 1 # initialises count to 1
 	addi $t3, $t3, 1 # initialises count to 1
 	beq $t7, 10, restart_count# if the value in $t7 is empty it restarts the count
 	beq $t7, 0, restart_count#if the value in $t7 is empty it restarts the 
@@ -57,13 +57,15 @@ check_characters_and_spaces:
 	j check_characters_and_spaces #jumps to function
 
 restart_count:
-	sub $t0, $t0, $t3 	#restarting the pointer in char_array
+	sub $t8, $t8, $t3 	#restarting the pointer in char_array
 	la $t3, 0 			#restarting the counter
 
 continue_check:
-	lb $t7,0($t0) # loads the byte value of $t0 into $t7
-	addi $t0, $t0, 1 # initialises count to 1
+	lb $t7,0($t8) # loads the byte value of $t8 into $t7
+	addi $t8, $t8, 1 # initialises count to 1
 	beq $t7, 32, continue_check # if the user input is a space then we run the continue check function
+	
+addi $t8, $t8, -1 #initialises value to ensure proper calculations
 	
 
 li $v0,10 #ends program
