@@ -38,6 +38,12 @@ space_ignore:
 	beq $t7, 10, No_input_error # if the user input is = 10(line feed) then there is no input error
 	beq $t7, $0, No_input_error #if the value of the user input is null then no input error is called
 
+#proceeds to check the individual letters to ensure that there are no intermittent spaces etc
+check_characters:
+	lb $t7,0($t0)# loads the byte value of $t0 into $t7	
+	addi $t0, $t0, 1 # initialises count to 1
+	addi $t3, $t3, 1 # initialises count to 1
+
 li $v0,10 #ends program
 syscall # call operating system to perform operation
 
