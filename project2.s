@@ -147,6 +147,12 @@ Input_Long_Error:
 
 Out_of_range_Error:
 	la $a0, out_of_range #loads string
+	li $v0, 4 # print string function
+	syscall
+	li $v0,10 #ends program
+	syscall	 
+
+	jr $ra
 	
 
 li $v0,10 #ends program
