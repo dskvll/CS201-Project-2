@@ -6,6 +6,12 @@ empty_input: .asciiz "Input is empty."
 user_input: .space 50000
 .text # Assembly language instructions
 main: # Start of code section
+# begins getting user input
+li $v0, 8   # read string command
+la $a0, user_input #stores user string into register
+li $a1, 50000 
+syscall # calls previous instructions
 
+li $v0,10 #ends program
 syscall # call operating system to perform operation
 
