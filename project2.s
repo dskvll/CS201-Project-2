@@ -51,6 +51,10 @@ check_characters_and_spaces:
 	lb $t7,0($t0) # loads the byte value of $t0 into $t7
 	addi $t0, $t0, 1 # initialises count to 1
 	addi $t3, $t3, 1 # initialises count to 1
+	beq $t7, 10, restart_count# if the value in $t7 is empty it restarts the count
+	beq $t7, 0, restart_count#if the value in $t7 is empty it restarts the 
+	bne $t7, 32, Out_of_range_Error ## if the user input is not equal to a space then the input is not a valid input
+	j check_characters_and_spaces #jumps to function
 
 li $v0,10 #ends program
 syscall # call operating system to perform operation
