@@ -93,7 +93,12 @@ Length_to_power:
 multiply:
 	mult $t7, $t1 #multiples the user input by the required base
 	mflo $t4			# stores the multiplication value
-	add $t5, $t5, $t4 	# adds he values together to get the total
+	add $t5, $t5, $t4 	# adds the values together to get the total
+	beq $t1, 1, Exit # if the base value is 1 then the exit function is called.
+	div $t1, $s0 #dividing t4 to the next power of base
+	mflo $t1 #moves value into $t1
+	add $t8, $t8, 1 #increments the number
+	lb $t7,0($t8) #loads the value of the number into t7
 	
 
 li $v0,10 #ends program
