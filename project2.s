@@ -32,8 +32,8 @@ addi $t1, $0, 1 	#initializes register for future use
 # processes spaces and disregards them
 space_ignore:
 	lb $t7,0($t8)# loads the byte value of $t8 into $t7	
-	addi $t8, $t8, 1# initialises count to 1
-	addi $t3, $t3, 1# initialises count to 1
+	addi $t8, $t8, 1#increments
+	addi $t3, $t3, 1#increments
 	beq $t7, 32, space_ignore # if the user input is a space then we run the ignore program
 	beq $t7, 10, No_input_error # if the user input is = 10(line feed) then there is no input error
 	beq $t7, $0, No_input_error #if the value of the user input is null then no input error is called
@@ -41,16 +41,16 @@ space_ignore:
 #proceeds to check the individual letters to ensure that there are no intermittent spaces etc
 check_characters:
 	lb $t7,0($t8)# loads the byte value of $t8 into $t7	
-	addi $t8, $t8, 1 # initialises count to 1
-	addi $t3, $t3, 1 # initialises count to 1
+	addi $t8, $t8, 1 #increments
+	addi $t3, $t3, 1 #increments
 	beq $t7, 10, restart_count # if the value in $t7 is empty it restarts the count
 	beq $t7, 0, restart_count  #if the value in $t7 is empty it restarts the count
 	bne $t7, 32, check_characters # if the user input is not equal to a space then check characters is run
 
 check_characters_and_spaces:
 	lb $t7,0($t8) # loads the byte value of $t8 into $t7
-	addi $t8, $t8, 1 # initialises count to 1
-	addi $t3, $t3, 1 # initialises count to 1
+	addi $t8, $t8, 1 #increments
+	addi $t3, $t3, 1 #increments
 	beq $t7, 10, restart_count# if the value in $t7 is empty it restarts the count
 	beq $t7, 0, restart_count#if the value in $t7 is empty it restarts the 
 	bne $t7, 32, Out_of_range_Error ## if the user input is not equal to a space then the input is not a valid input
@@ -62,7 +62,7 @@ restart_count:
 
 continue_check:
 	lb $t7,0($t8) # loads the byte value of $t8 into $t7
-	addi $t8, $t8, 1 # initialises count to 1
+	addi $t8, $t8, 1 #increments
 	beq $t7, 32, continue_check # if the user input is a space then we run the continue check function
 	
 addi $t8, $t8, -1 #initialises value to ensure proper calculations
@@ -152,9 +152,5 @@ Out_of_range_Error:
 	li $v0,10 #ends program
 	syscall	 
 
-	jr $ra
 	
-
-li $v0,10 #ends program
-syscall # call operating system to perform operation
 
