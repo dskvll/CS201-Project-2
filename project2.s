@@ -124,6 +124,10 @@ Capital_letter:
 
 Common_letter:
 	addi $t7, $t7, -87 #subtracts 87 to get the value in decimal
+	j multiply	
+
+Number:
+	addi $t7, $t7, -48 	##subtracts 48 to get the value in decimal
 	j multiply				
 		
 
