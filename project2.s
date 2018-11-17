@@ -134,23 +134,23 @@ Number:
 No_input_error:
 	la $a0, empty_input #loads string
 	li $v0, 4 # print string function
-	syscall
+	syscall # calls operating system to do the preceding instruction
 	li $v0,10 #ends program
-	syscall
+	syscall # calls operating system to do the preceding instruction
 
 Input_Long_Error:
 	la $a0, too_long_input #loads string
 	li $v0, 4 # print string function
-	syscall
+	syscall # calls operating system to do the preceding instruction
 	li $v0,10 #ends program
-	syscall
+	syscall # calls operating system to do the preceding instruction
 
 Out_of_range_Error:
 	la $a0, out_of_range #loads string
 	li $v0, 4 # print string function
-	syscall
+	syscall # calls operating system to do the preceding instruction
 	li $v0,10 #ends program
-	syscall	 
+	syscall	 # calls operating system to do the preceding instruction
 
 	
 
