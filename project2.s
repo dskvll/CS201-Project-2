@@ -77,6 +77,12 @@ check_length:
 	beq $t3, 5, Input_Long_Error # if the user input exceeds four then it is too long
 	j check_length # jumps to check length function
 	
+reset_pointer:
+	sub $t8, $t8, $t3 # subtracts the pointer from t8 and stores it in t8
+	sub $t3, $t3, $t1 #subtracts t1 from t3 and stores it in t1
+	lb $t7, ($t8) # loads the subracted value into t7
+	sub $s1, $t3, $t1 # stores the value of t3-t1 into s1
+	
 	
 
 li $v0,10 #ends program
