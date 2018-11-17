@@ -3,7 +3,7 @@
 too_long_input: .asciiz "Input is too long."
 out_of_range: .asciiz "Invalid base-27 number." 
 empty_input: .asciiz "Input is empty."
-user_input: .space 50000
+user_input: .space 85000
 .text # Assembly language instructions
 main: # Start of code section
 
@@ -11,7 +11,7 @@ main: # Start of code section
 
 li $v0, 8   # read string command
 la $a0, user_input #stores user string into register
-li $a1, 50000 
+li $a1, 85000 
 syscall # calls previous instructions
 
 add $t7, $0, 0 #initialises register
@@ -55,6 +55,8 @@ check_characters_and_spaces:
 	beq $t7, 0, restart_count#if the value in $t7 is empty it restarts the 
 	bne $t7, 32, Out_of_range_Error ## if the user input is not equal to a space then the input is not a valid input
 	j check_characters_and_spaces #jumps to function
+	
+addi $t9, $t7, -100
 
 restart_count:
 	sub $t8, $t8, $t3 	#restarting the pointer in char_array
@@ -66,6 +68,8 @@ continue_check:
 	beq $t7, 32, continue_check # if the user input is a space then we run the continue check function
 	
 addi $t8, $t8, -1 #initialises value to ensure proper calculations
+
+mult $s3, $t7
 
 check_length:
 	lb $t7, ($t8) #loads value from t8 into t7
@@ -83,12 +87,16 @@ reset_pointer:
 	lb $t7, ($t8) # loads the subracted value into t7
 	sub $s1, $t3, $t1 # stores the value of t3-t1 into s1
 
+addi $t9, $t9, 10
+
 Length_to_power:	
 	beq $s1, 0, Ascii_to_decimal	#Bringing base to last power of the string
 	mult $t1, $s0 #multiplies the base number by t1
 	mflo $t1 #stores the value into t1
 	sub $s1, $s1, 1 #decrements
 	j Length_to_power
+	
+addi $s4, $t7, 99
 
 multiply:
 	mult $t7, $t1 #multiples the user input by the required base
@@ -138,13 +146,6 @@ No_input_error:
 	li $v0,10 #ends program
 	syscall # calls operating system to do the preceding instruction
 
-Input_Long_Error:
-	la $a0, too_long_input #loads string
-	li $v0, 4 # print string function
-	syscall # calls operating system to do the preceding instruction
-	li $v0,10 #ends program
-	syscall # calls operating system to do the preceding instruction
-
 Out_of_range_Error:
 	la $a0, out_of_range #loads string
 	li $v0, 4 # print string function
@@ -152,5 +153,13 @@ Out_of_range_Error:
 	li $v0,10 #ends program
 	syscall	 # calls operating system to do the preceding instruction
 
-	
+
+Input_Long_Error:
+	la $a0, too_long_input #loads string
+	li $v0, 4 # print string function
+	syscall # calls operating system to do the preceding instruction
+	li $v0,10 #ends program
+	syscall # calls operating system to do the preceding instruction
+
+
 
